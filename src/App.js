@@ -1,14 +1,58 @@
 import "./App.css";
+import { Button, Dropdown } from "antd";
+import { useTranslation, Trans } from "react-i18next";
 
 function App() {
+  const { t, i18n } = useTranslation();
+  const items = [
+    {
+      label: "English",
+      key: "english",
+    },
+    {
+      label: "French",
+      key: "french",
+    },
+    {
+      label: "German",
+      key: "german",
+    },
+  ];
+
+  const handleChangeLanguage = (e) => {
+    i18n.changeLanguage(e.key);
+  };
+
   return (
     <div className="App">
-      <h1>React testing Example</h1>
-      <img
-        alt=""
-        title="Ai generator image"
-        src="https://img.freepik.com/free-photo/close-up-cucumbers-with-celery_23-2148853387.jpg?w=1060&t=st=1697451947~exp=1697452547~hmac=f43eb318f8776576bfdac5c5b661e6c525ffbcb11519e5a3b7bddd9803568404"
-      />
+      <Dropdown
+        menu={{
+          items,
+          onClick: handleChangeLanguage,
+        }}
+        trigger={["click"]}
+        oncl
+      >
+        <Button
+          style={{
+            width: "20%",
+          }}
+        >
+          Language
+        </Button>
+      </Dropdown>
+      <div
+        style={{
+          marginTop: "4rem",
+        }}
+      >
+        <h2>{t("Welcome to React")}</h2>
+
+        <Trans i18nKey="We offer a suite of products that help you enhance your customer's image experience at every touchpoint of their buying journey">
+          We offer a suite of products that help you enhance your customer's
+          image experience at every touchpoint of their buying journey.{" "}
+        </Trans>
+      </div>
     </div>
   );
 }
